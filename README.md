@@ -5,9 +5,11 @@ RackHD/OnRack (https://github.com/RackHD) is the open-sourced Hardware Managemen
 software developed by EMC for datacenter administration.
 
 FIT stands for Functional Integration Tests and is intended for Continuous Integration testing
-as well as standalone testing. It was originally developed by the EMC OnRack test group to git
+as well as standalone testing. It was originally developed by the EMC OnRack test group to provide
 the RackHD community a flexible test and deployment toolset that will work in a variety of
 valid configurations and environments.
+
+FIT is written in Python 2.7 'unittest' and uses Nose (nosetests) as the test runner.
 
 # Running FIT
 
