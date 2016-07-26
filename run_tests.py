@@ -10,39 +10,31 @@ This Script runs nose tests with command-line arguments.
 
 usage: run_tests.py [-h] [-test TEST] [-group GROUP] [-stack STACK] [-ora ORA]
                     [-version VERSION] [-xunit] [-list] [-sku SKU]
-                    [-source SOURCE] [-branch BRANCH]
-                    [-obmmac OBMMAC | -nodeid NODEID] [-overlay OVERLAY]
-                    [-v V]
+                    [-obmmac OBMMAC | -nodeid NODEID] [-v V]
 
 Command Help
 
 optional arguments:
   -h, --help        show this help message and exit
   -test TEST        test to execute, default: tests/
-  -group GROUP      test group to execute: 'smoke', 'regression',
-                    'extended', default: all
-  -stack STACK      stack number, overrides -ip and -bmc
-  -ora ORA          OnRack/RackHD appliance IP address or hostname
+  -group GROUP      test group to execute: 'smoke', 'regression', 'extended',
+                    default: 'all'
+  -stack STACK      stack label (test bed), overrides -ora
+  -ora ORA          OnRack/RackHD appliance IP address or hostname, default:
+                    localhost
   -version VERSION  OnRack version, example:onrack-release-0.3.0, default:
                     onrack-devel
   -xunit            generates xUnit XML report files
   -list             generates test list only
   -sku SKU          node SKU, example:Phoenix, default=all
-  -source SOURCE    RackHD source repo
   -obmmac OBMMAC    node OBM MAC address, example:00:1e:67:b1:d5:64,
                     default=all
   -nodeid NODEID    node identifier string of a discovered node, example:
                     56ddcf9a8eff16614e79ec74
-  -overlay OVERLAY  set to overlay (delete/add) just after OnRack install
   -v V              Verbosity level of console output, default=0, Built Ins:
                     0: No debug, 2: User script output, 4: rest calls and
                     status info, 6: other common calls (ipmi, ssh), 9: all the
                     rest
-
-To run the full test suite against a specified OnRack/RackHD appliance at IP 192.168.1.1:
-
-./run_test.py -ora 192.168.1.1 -test tests/
-
 '''
 
 import os
@@ -59,9 +51,9 @@ ARG_PARSER = argparse.ArgumentParser(description="Command Help")
 ARG_PARSER.add_argument("-test", default="tests/",
                         help="test to execute, default: tests/")
 ARG_PARSER.add_argument("-group", default="all",
-                        help="test group to execute: 'smoke_test', 'regression', 'extended', default: 'all'")
+                        help="test group to execute: 'smoke', 'regression', 'extended', default: 'all'")
 ARG_PARSER.add_argument("-stack", default="None",
-                        help="stack number, overrides -ip and -bmc")
+                        help="stack label (test bed), overrides -ora")
 ARG_PARSER.add_argument("-ora", default="localhost",
                         help="OnRack/RackHD appliance IP address or hostname, default: localhost")
 ARG_PARSER.add_argument("-version", default="onrack-devel",

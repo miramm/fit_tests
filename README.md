@@ -44,7 +44,6 @@ All FIT tests can be run from the wrapper 'run_tests.py':
 
     usage: run_tests.py [-h] [-test TEST] [-group GROUP] [-stack STACK] [-ora ORA]
                         [-version VERSION] [-xunit] [-list] [-sku SKU]
-                        [-source SOURCE] [-branch BRANCH]
                         [-obmmac OBMMAC | -nodeid NODEID] [-v V]
 
     Command Help
@@ -52,9 +51,9 @@ All FIT tests can be run from the wrapper 'run_tests.py':
     optional arguments:
       -h, --help        show this help message and exit
       -test TEST        test to execute, default: tests/
-      -group GROUP      test group to execute: 'smoke_test', 'regression',
-                        'extended', default: 'all'
-      -stack STACK      stack number, overrides -ip and -bmc
+      -group GROUP      test group to execute: 'smoke', 'regression', 'extended',
+                        default: 'all'
+      -stack STACK      stack label (test bed), overrides -ora
       -ora ORA          OnRack/RackHD appliance IP address or hostname, default:
                         localhost
       -version VERSION  OnRack version, example:onrack-release-0.3.0, default:
@@ -71,11 +70,9 @@ All FIT tests can be run from the wrapper 'run_tests.py':
                         status info, 6: other common calls (ipmi, ssh), 9: all the
                         rest
 
-
 This example will run the RackHD installer onto stack 1 via the wrapper script:
 
     ./run_tests.py -stack 1 -test autotest/run_rackhd_installer.py
-
 
 Alternatively tests can be run directly from nose. Runtime parameters such as ORA address must be set in the environment.
 
