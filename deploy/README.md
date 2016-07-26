@@ -16,9 +16,11 @@
     ESXi installation requires 'ovftool'.
 
     Load the virtual environment on the Linux test host:
-        virtualenv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
+    '''
+    virtualenv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    '''
 
 ## Wrapper scripts
 
@@ -26,5 +28,7 @@
     Python 'nosetests' runs tests in alpha order which can be difficult to ensure proper sequencing.
 
     Example for running RackHD installation:
-        python run_tests.py -stack stack1 -test deploy/run_rackhd_installer.py
+    '''
+    python run_tests.py -stack stack1 -test deploy/run_rackhd_installer.py
+    '''
 

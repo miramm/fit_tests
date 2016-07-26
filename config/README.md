@@ -6,7 +6,7 @@
 ## Global config file:
 
     The global config file specifies operating parameters and test environment.
-
+    '''
     {
       "credentials": { # section for all usernames and passwords
         "hyper": [ # appliance hypervisor credentials, may be multiple, first is default
@@ -58,6 +58,9 @@
         "community": "onrack"
     },
       "repos": { # list of all OS and package repositories
+        "_comment": "This is the list of repositories for each category",
+        "proxy": "http://web.hwimo.lab.emc.com:3128",
+        "mirror": "http://mirrors.hwimo.lab.emc.com/mirrors",
         "os": { # all OS install repos
           "esxi55": "http://mirrors.hwimo.lab.emc.com/mirrors/esxi/5.5/",
           "esxi60": "http://mirrors.hwimo.lab.emc.com/mirrors/esxi/6.0/",
@@ -86,18 +89,6 @@
             "bmc": "",
             "raid": "",
             "config": ""
-          },
-          "rinjin": {
-            "bios": "",
-            "bmc": "",
-            "raid": "",
-            "config": ""
-          },
-          "dell-r630": {
-            "bios": "",
-            "bmc": "",
-            "raid": "",
-            "config": ""
           }
         }
       },
@@ -107,7 +98,7 @@
         "https": 8443
       }
     }
-
+    '''
 ## Stack config:
 
     The stack config file specifies addresses and environment for the specific hardware under test.
@@ -116,6 +107,7 @@
     The stack key is used to identify the hardware to be used with test scripts using the '-stack' argument.
 
     Sample stack configuration file:
+    '''
     {
     "stack1":{                           #stack label, can be any number of stacks defined
         "bmc": "stack1.bmc.lab",         #appliance bmc address (required)
@@ -127,6 +119,7 @@
         "pdu": "192.168.1.5",            #PDU admin address (optional)
         "type": "esxi"                   #deployment type: esxi, docker, linux (required)
     }
+    '''
 
 # Stack config override files:
 

@@ -1,21 +1,33 @@
-# Running FIT (Functional Integration Tests)
+# FIT Test Overview
 
+The FIT test suite is an open-source testing harness for RackHD and OnRack software.
+RackHD/OnRack (https://github.com/RackHD) is the open-sourced Hardware Management and Orchestration
+software developed by EMC for datacenter administration.
+
+FIT stands for Functional Integration Tests and is intended for Continuous Integration testing
+as well as standalone testing. It was originally developed by the EMC OnRack test group to git
+the RackHD community a flexible test and deployment toolset that will work in a variety of
+valid configurations and environments.
+
+# Running FIT (Functional Integration Tests)
 
 ## Requirements and Setup
 
     FIT tests are intended to be run on Ubuntu 14+ Linux.
     Test harness may be run on appliance host (localhost), or third party machine.
-    Deploymnet scripts must be run under third party Ubuntu Linux host.
+    Deployment scripts must be run under third party Ubuntu Linux host.
     Tests require the following virtual environment commands be executed:
-        virtualenv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
+    '''
+    virtualenv .venv
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    '''
 
 ## Organization
 
     The test harness is located in the 'tests' tree.
     Common libraries are located in 'common'
-    Deployment and wrapper scripts are located in 'deploy'.
+    Deployment and test wrapper scripts are located in 'deploy'.
     Test script templates are located in 'templates'.
     Utilities are located in 'util'.
 
@@ -59,31 +71,35 @@
 
 
     This example will run the RackHD installer onto stack 1 via the wrapper script:
-
+    '''
     ./run_tests.py -stack 1 -test autotest/run_rackhd_installer.py
+    '''
 
     Alternatively tests can be run directly from nose. Runtime parameters such as ORA address must be set in the environment.
 
     The following example will run all the entire test harness from a third party machine to ORA at 192.168.1.1:
-
+    '''
     export ORA=192.168.1.1
     nosetests -s tests
+    '''
 
 ## Running individual tests
 
     Individual test scripts or tests may be executed using the following 'Nose' addressing scheme:
-
-        test_script_path:classname.testname
+    '''
+    test_script_path:classname.testname
+    '''
 
     For example, to run the test 'test_rackhd11_api_catalogs' in script 'tests/rackhd11/test_rackhd11_api_catalogs.py' on stack 1:
-
-        python run_tests.py -stack 11 -test tests/rackhd11/test_rackhd11_api_catalogs.py:test_rackhd11_api_catalogs.test_api_11_catalogs
+    '''
+    python run_tests.py -stack 11 -test tests/rackhd11/test_rackhd11_api_catalogs.py:test_rackhd11_api_catalogs.test_api_11_catalogs
+    '''
 
 ## Test conventions
 
     Tests should leave the DUT(Device Under Test) in the same state that it was found. If the test creates a node, then delete it.
     Tests should have meaningful names that relate to its function.
     If tests need to be run in a sequence, use numbered class and method names 'test01'. 'test02', etc.
-    If scripts need ro run in a sequence, use a wrapper script and number the method names.
+    If scripts need to run in a sequence, use a wrapper script and number the method names.
     Tests that need specific conditions should be run in a single script and utilize 'setUp' and 'tearDown' methods.
 
