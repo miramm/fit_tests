@@ -1,2 +1,89 @@
-# fit_tests
-OnRack FIT Continuous Integration Tests
+# Running FIT (Functional Integration Tests)
+
+
+## Requirements and Setup
+
+    FIT tests are intended to be run on Ubuntu 14+ Linux.
+    Test harness may be run on appliance host (localhost), or third party machine.
+    Deploymnet scripts must be run under third party Ubuntu Linux host.
+    Tests require the following virtual environment commands be executed:
+        virtualenv .venv
+        source .venv/bin/activate
+        pip install -r requirements.txt
+
+## Organization
+
+    The test harness is located in the 'tests' tree.
+    Common libraries are located in 'common'
+    Deployment and wrapper scripts are located in 'deploy'.
+    Test script templates are located in 'templates'.
+    Utilities are located in 'util'.
+
+## Configuration
+
+    Local runtime parameters are set from the 'config/global_config.json' file.
+    Stack definitions are set from the 'config/stack_config.json' file.
+
+## Running the tests
+
+    All FIT tests can be run from the wrapper 'run_tests.py':
+
+    usage: run_tests.py [-h] [-test TEST] [-group GROUP] [-stack STACK] [-ora ORA]
+                        [-version VERSION] [-xunit] [-list] [-sku SKU]
+                        [-source SOURCE] [-branch BRANCH]
+                        [-obmmac OBMMAC | -nodeid NODEID] [-v V]
+
+    Command Help
+
+    optional arguments:
+      -h, --help        show this help message and exit
+      -test TEST        test to execute, default: tests/
+      -group GROUP      test group to execute: 'smoke_test', 'regression',
+                        'extended', default: 'all'
+      -stack STACK      stack number, overrides -ip and -bmc
+      -ora ORA          OnRack/RackHD appliance IP address or hostname, default:
+                        localhost
+      -version VERSION  OnRack version, example:onrack-release-0.3.0, default:
+                        onrack-devel
+      -xunit            generates xUnit XML report files
+      -list             generates test list only
+      -sku SKU          node SKU, example:Phoenix, default=all
+      -obmmac OBMMAC    node OBM MAC address, example:00:1e:67:b1:d5:64,
+                        default=all
+      -nodeid NODEID    node identifier string of a discovered node, example:
+                        56ddcf9a8eff16614e79ec74
+      -v V              Verbosity level of console output, default=0, Built Ins:
+                        0: No debug, 2: User script output, 4: rest calls and
+                        status info, 6: other common calls (ipmi, ssh), 9: all the
+                        rest
+
+
+    This example will run the RackHD installer onto stack 1 via the wrapper script:
+
+    ./run_tests.py -stack 1 -test autotest/run_rackhd_installer.py
+
+    Alternatively tests can be run directly from nose. Runtime parameters such as ORA address must be set in the environment.
+
+    The following example will run all the entire test harness from a third party machine to ORA at 192.168.1.1:
+
+    export ORA=192.168.1.1
+    nosetests -s tests
+
+## Running individual tests
+
+    Individual test scripts or tests may be executed using the following 'Nose' addressing scheme:
+
+        test_script_path:classname.testname
+
+    For example, to run the test 'test_rackhd11_api_catalogs' in script 'tests/rackhd11/test_rackhd11_api_catalogs.py' on stack 1:
+
+        python run_tests.py -stack 11 -test tests/rackhd11/test_rackhd11_api_catalogs.py:test_rackhd11_api_catalogs.test_api_11_catalogs
+
+## Test conventions
+
+    Tests should leave the DUT(Device Under Test) in the same state that it was found. If the test creates a node, then delete it.
+    Tests should have meaningful names that relate to its function.
+    If tests need to be run in a sequence, use numbered class and method names 'test01'. 'test02', etc.
+    If scripts need ro run in a sequence, use a wrapper script and number the method names.
+    Tests that need specific conditions should be run in a single script and utilize 'setUp' and 'tearDown' methods.
+
