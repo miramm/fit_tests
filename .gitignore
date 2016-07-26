@@ -1,0 +1,9 @@
+*.pyc
+*.log
+.idea
+*~
+*.orig
+*.bak
+*.rej
+*.xml
+*.html
