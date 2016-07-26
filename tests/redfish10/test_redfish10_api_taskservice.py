@@ -104,9 +104,8 @@ from nose.plugins.attrib import attr
 class redfish10_api_task_suite(fit_common.unittest.TestCase):
 
     def test_redfish_v1_taskservice_tasklist(self):
-        '''
-        The API /redfish/v1/TaskService will display the list of tasks in the system
-        '''
+        # The API /redfish/v1/TaskService will display the list of tasks in the system
+
         tasklist = []
         # This test checks the TaskService API
         if fit_common.VERBOSITY >= 2:
@@ -141,11 +140,10 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
 
 
     def test_redfish_v1_taskservice_check_all_tasks(self):
-        '''
-        The API TaskService/Tasks will display a list of all the tasks
-        that were run and are active in the system.  This includes tasks for everything,
-        managed and unmanaged nodes and non-node specific tasks.
-        '''
+        # The API TaskService/Tasks will display a list of all the tasks
+        # that were run and are active in the system.  This includes tasks for everything,
+        # managed and unmanaged nodes and non-node specific tasks.
+
         tasklist = []
         if fit_common.VERBOSITY >= 2:
             msg = "Description: Display the list of Tasks in the System."
@@ -181,10 +179,9 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
 
 
     def test_redfish_v1_taskservice_tasks_per_node(self):
-        '''
-        The API TaskService/Oem/Tasks/<systemid> will display a list of all tasks that
-        are associated with the specified node id for managed systems.
-        '''
+        # The API TaskService/Oem/Tasks/<systemid> will display a list of all tasks that
+        # are associated with the specified node id for managed systems.
+
         # if verbose
         if fit_common.VERBOSITY >= 2:
             msg = "Description: Display the list of Tasks for each System"
@@ -204,10 +201,9 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
                     print_taskid_data(taskid, taskdata)
 
     def test_redfish_v1_taskservice_task_count_per_node(self):
-        '''
-        The API /redfish/v1/TaskService/Oem/Tasks/<id> will check the count for each list of tasks
-        associated with all node ids.
-        '''
+        # The API /redfish/v1/TaskService/Oem/Tasks/<id> will check the count for each list of tasks
+        # associated with all node ids.
+
         if fit_common.VERBOSITY >= 2:
             msg = "Description: Check the reported task count in the list of Tasks for each System"
             print("\n\t{0}".format(msg))
@@ -232,10 +228,8 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
                 print("\tNodeID: {0} Number of tasks reported {1}".format(node, taskcount))
 
     def test_redfish_v1_taskservice_check_task_data_fields(self):
-        '''
-        The API TaskSerive/Tasks will display the task data associated with the specified
-        task.
-        '''
+        # The API TaskSerive/Tasks will display the task data associated with the specified task.
+
         if fit_common.VERBOSITY >= 2:
             msg = "Description: Display the data for each taskid contained in the System."
             print("\n\t{0}".format(msg))
@@ -267,17 +261,16 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
                 
 
     def test_redfish_v1_taskservice_check_task_return_status_validity(self):
-        '''
-        Check the return status in the tasks to be in the valid list
-        Mapping of RackHD 1.1 to  Redfish v1 status is:
-            running   : Running
-            succeeded : Completed
-            finished  : Completed
-            failed    : Exception
-            timeout   : Exception
-            cancelled : Killed
-            pending   : Pending
-        '''
+        # Check the return status in the tasks to be in the valid list
+        # Mapping of RackHD 1.1 to  Redfish v1 status is:
+        #    running   : Running
+        #    succeeded : Completed
+        #    finished  : Completed
+        #    failed    : Exception
+        #    timeout   : Exception
+        #    cancelled : Killed
+        #    pending   : Pending
+
         status = []
 
         def task_code_check(tasklist):
@@ -329,9 +322,8 @@ class redfish10_api_task_suite(fit_common.unittest.TestCase):
 
 
     def test_redfish_v1_taskservice_check_library_test_list(self):
-        '''
-        Return the task list libary from rackhd
-        '''
+        # Return the task list libary from rackhd
+
         if fit_common.VERBOSITY >= 2:
             msg = "Description: Get list of supported tasks via monorail workflow task library"
             print("\n\t{0}".format(msg))
