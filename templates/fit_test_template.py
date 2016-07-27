@@ -1,13 +1,10 @@
-# Copyright 2016, EMC, Inc.
+'''
+Copyright 2016, EMC, Inc.
 
+Author(s):
 
-"""
-This is a FIT test script template.
-"""
-
-__author__= "me"
-__version__= "1.0"
-__description__= "foo package"
+FIT test script template
+'''
 
 import os
 import sys

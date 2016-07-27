@@ -1,7 +1,9 @@
-# Copyright 2015, EMC, Inc.
-
 '''
-This is a wrapper script template.
+Copyright 2016, EMC, Inc.
+
+Author(s):
+
+FIT test wrapper script template
 '''
 
 import os
