@@ -18,8 +18,12 @@ import fit_common
 # This node catalog section will be replaced with fit_common.node_select() when it is checked in
 NODECATALOG = fit_common.node_select()
 
-# Select one node at random
-NODE = NODECATALOG[random.randint(0, len(NODECATALOG)-1)]
+NODE = ""
+# Select one node at random that's not a management server
+for dummy in NODECATALOG:
+    NODE = NODECATALOG[random.randint(0, len(NODECATALOG)-1)]
+    if fit_common.rackhdapi('/api/2.0/nodes/' + NODE)['json']['name'] != "Management Server":
+        break
 
 # this routine polls a task ID for completion
 def wait_for_task_complete(taskid, sysid, retries=60):
