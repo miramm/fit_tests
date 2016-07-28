@@ -12,7 +12,7 @@ The global config file specifies operating parameters and test environment.
         "hyper": [ # appliance hypervisor credentials, may be multiple, first is default
           {
             "username": "root",
-            "password": "1234567"
+            "password": "password"
           }
         ],
         "ora": [ # appliance admin credentials, may be multiple, first is default
@@ -28,13 +28,13 @@ The global config file specifies operating parameters and test environment.
           },
           {
             "username": "root",
-            "password": "1234567"
+            "password": "password"
           }
         ],
         "node": [ # node OS login credentials, may be multiple, first is default
           {
             "username": "root",
-            "password": "1234567"
+            "password": "password"
           },
           {
             "username": "onrack",
@@ -44,7 +44,7 @@ The global config file specifies operating parameters and test environment.
         "switch": [ # switch login credentials, may be multiple, first is default
           {
             "username": "admin",
-            "password": "1234567"
+            "password": "password"
           }
         ],
         "pdu": [ # PDU login credentials, may be multiple, first is default
@@ -59,8 +59,8 @@ The global config file specifies operating parameters and test environment.
     },
       "repos": { # list of all OS and package repositories
         "_comment": "This is the list of repositories for each category",
-        "proxy": "http://web.hwimo.lab.emc.com:3128",
-        "mirror": "http://mirrors.hwimo.lab.emc.com/mirrors",
+        "proxy": "http://proxy.lab.com:3128",
+        "mirror": "http://mirrors.lab.com/mirrors",
         "os": { # all OS install repos
           "esxi55": "http://172.31.128.1:8080/mirror/esxi/5.5/esxi",
           "esxi60": "http://172.31.128.1:8080/mirror/esxi/6.0/esxi6",
@@ -69,9 +69,9 @@ The global config file specifies operating parameters and test environment.
           "rhel70": "http://172.31.128.1:8080/mirror/rhel/7.0/os/x86_64"
         },
         "install": { # RackHD and OnRack installation repos
-          "template": "http://mirrors.hwimo.lab.emc.com/mirrors/ova/ubunutu16.ova", # OVA template
-          "onrackova": "http://mirrors.hwimo.lab.emc.com/mirrors/ova/onrack.ova", # OnRack OVA install
-          "onrack": "http://onrack.hwimo.lab.emc.com/get/", # OnRack package install mirror
+          "template": "http://mirrors.lab.com/mirrors/ova/ubunutu16.ova", # OVA template
+          "onrackova": "http://mirrors.lab.com/mirrors/ova/onrack.ova", # OnRack OVA install
+          "onrack": "http://mirrors.lab.com/get/", # OnRack package install mirror
           "rackhd": "https://github.com/rackhd/" # RackHD Git repo
           },
         "skupack": [ # SKU pack repositories, may be multiple
@@ -79,16 +79,16 @@ The global config file specifies operating parameters and test environment.
           ],
         "firmware": { # all firmware repos
           "quanta-t41": {
-            "bios": "",
-            "bmc": "",
-            "raid": "",
-            "config": ""
+            "bios": "http://mirrors.lab.com/mirrors/quanta-t41/bios",
+            "bmc": "http://mirrors.lab.com/mirrors/quanta-t41/bmc",
+            "raid": "http://mirrors.lab.com/mirrors/megaraid/raid",
+            "config": "http://mirrors.lab.com/mirrors/quanta-t41/config"
           },
           "quanta-d51": {
-            "bios": "",
-            "bmc": "",
-            "raid": "",
-            "config": ""
+            "bios": "http://mirrors.lab.com/mirrors/quanta-d51/bios",
+            "bmc": "http://mirrors.lab.com/mirrors/quanta-d51/bmc",
+            "raid": "http://mirrors.lab.com/mirrors/megaraid/raid",
+            "config": "http://mirrors.lab.com/mirrors/quanta-d51/config"
           }
         }
       },
@@ -109,14 +109,14 @@ The stack key is used to identify the hardware to be used with test scripts usin
 Sample stack configuration file:
 
     {
-    "stack1":{                           #stack label, can be any number of stacks defined
+    "stack1":{                           #alphanumeric stack label, can be any number of stacks defined
         "bmc": "stack1.bmc.lab",         #appliance bmc address (required)
         "control": "stack1.control.lab", #control switch admin address (optional)
         "data": "stack1.data.lab",       #data switch admin address (optional)
         "hyper": "stack1.esxi.lab",      #esxi hypervisor admin address (required only for esxi)
         "ora": "stack1.host.lab",        #appliance OVA admin address (required)
         "ovamac": "00:50:56:00:11:00",   #appliance OVA MAC address (required only for esxi)
-        "pdu": "192.168.1.5",            #PDU admin address (optional)
+        "pdu": "192.168.1.255",          #PDU admin address (optional)
         "type": "esxi"                   #deployment type: esxi, docker, linux (required)
     }
 
