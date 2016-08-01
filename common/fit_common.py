@@ -23,10 +23,10 @@ import pexpect
 # Globals
 # Get top level path via git
 TEST_PATH = subprocess.check_output("git rev-parse --show-toplevel", shell=True).rstrip("\n") + "/"
-CONFIG_PATH = TEST_PATH + "config/"
+CONFIG_PATH = os.getenv("CONFIG", TEST_PATH + "config/")
+VERBOSITY = int(os.getenv("VERBOSITY", "1"))
 GLOBAL_CONFIG = []
 STACK_CONFIG = []
-VERBOSITY = int(os.getenv("VERBOSITY", "1"))
 
 # List of BMC IP addresses
 BMC_LIST = []
@@ -37,7 +37,7 @@ try:
     GLOBAL_CONFIG = json.loads(open(CONFIG_PATH + "global_config.json").read())
 except:
     print "**** Global Config file: " + CONFIG_PATH + "global_config.json" + " missing or corrupted! Exiting...."
-    exit(255)
+    sys.exit(255)
 try:
     STACK_CONFIG = json.loads(open(CONFIG_PATH + "stack_config.json").read())
 except:
@@ -57,7 +57,8 @@ for entry in os.listdir(CONFIG_PATH):
 # Pull arguments from environment into ARGS_LIST
 ARGS_LIST = \
     {
-    "v": int(os.getenv("VERBOSITY", "1")),
+    "v": VERBOSITY,
+    "config": CONFIG_PATH,
     "stack": os.getenv("STACK", "None"), # Stack label
     "ora": os.getenv("ORA", "localhost"), # Appliance IP or hostname
     "bmc": "None", # BMC IP or hostname
@@ -436,6 +437,7 @@ def run_nose(nosepath):
                              'export VERSION=' + str(ARGS_LIST['version']) + ';' +
                              'export XUNIT=' + str(ARGS_LIST['xunit']) + ';' +
                              'export GROUP=' + str(ARGS_LIST['group']) + ';' +
+                             'export CONFIG=' + str(ARGS_LIST['config']) + ';' +
                              'nosetests ' + noseopts + ' --xunit-file ' + xmlfile + ' ' + pathspec
                          ], shell=True)
     exitcode = 0

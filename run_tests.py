@@ -37,7 +37,6 @@ optional arguments:
                     rest
 '''
 
-import os
 import sys
 import subprocess
 import argparse
@@ -50,6 +49,8 @@ import fit_common
 ARG_PARSER = argparse.ArgumentParser(description="Command Help")
 ARG_PARSER.add_argument("-test", default="tests/",
                         help="test to execute, default: tests/")
+ARG_PARSER.add_argument("-config", default=fit_common.TEST_PATH + "config/",
+                        help="config file location, default: fit_tests/config")
 ARG_PARSER.add_argument("-group", default="all",
                         help="test group to execute: 'smoke', 'regression', 'extended', default: 'all'")
 ARG_PARSER.add_argument("-stack", default="None",
