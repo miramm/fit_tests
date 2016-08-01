@@ -47,7 +47,7 @@ class rackhd20_api_skus(fit_common.unittest.TestCase):
         self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
         api_data = fit_common.rackhdapi("/api/2.0/skus/" + api_data['json']['id'],
                                            action="delete")
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 204, 'Incorrect HTTP return code, expected 204, got:' + str(api_data['status']))
 
     def test_api_20_sku_post_patch_delete(self):
         data_payload = {
