@@ -128,5 +128,18 @@ class rackhd20_api_pollers(fit_common.unittest.TestCase):
                     self.assertNotEqual(nodelist[nodenum]['name'], nodelist[nodecheck]['name'],
                                         "Duplicate poller lib name " + nodelist[nodenum]['name'])
 
+    def test_api_20_pollers_id_data_current(self):
+        api_data = fit_common.rackhdapi('/api/2.0/pollers')
+        for item in api_data['json']:
+            poll_data = fit_common.rackhdapi('/api/2.0/pollers/' + item['id'] + '/data/current')
+            self.assertEqual(poll_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(poll_data['status']))
+            entrylist = ['host', 'node', 'timestamp', 'user']
+            for record in poll_data['json']:
+                for entry in entrylist:
+                    self.assertIn(entry, record, 'Missing entry: ' + entry)
+                if 'chassis' in record:
+                    self.assertIn('power', record['chassis'], 'Missing entry: power')
+                    self.assertIn('uid', record['chassis'], 'Missing entry: uid')
+
 if __name__ == '__main__':
     fit_common.unittest.main()
