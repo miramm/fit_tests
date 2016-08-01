@@ -72,7 +72,7 @@ class rackhd20_api_lookups(fit_common.unittest.TestCase):
         self.assertEqual(api_data['json']['ipAddress'], "128.128.128.128", "Bad lookup IP Address")
         self.assertEqual(api_data['json']['node'], node, "Bad lookup node ID")
         api_data = fit_common.rackhdapi("/api/2.0/lookups/" + lookup_id, action="delete")
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 204, 'Incorrect HTTP return code, expected 204, got:' + str(api_data['status']))
 
 if __name__ == '__main__':
     fit_common.unittest.main()
