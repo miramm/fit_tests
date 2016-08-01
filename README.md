@@ -98,11 +98,12 @@ For example, to run the test 'test_rackhd11_api_catalogs' in script 'tests/rackh
 
 ## Test conventions
 
-- Tests should leave the DUT(Device Under Test) in the same state that it was found. If the test creates a node, then delete it.
+- Tests should leave the DUT(Device Under Test) in the same state that it was found. For example, if the test creates a node, then delete it.
+The setUp and tearDown methods are useful ways to setup and clean out test-specific conditions.
 - Tests should have meaningful names that relate to its function.
 - If tests need to be run in a sequence, use numbered class and method names 'test01'. 'test02', etc.
 - If scripts need to run in a sequence, use a wrapper script and number the method names.
 - Tests that need specific conditions should be run in a single script and utilize 'setUp' and 'tearDown' methods.
-- Tests should not have any direct references to IP addresses or hostnames. Use GLOBAL_CONFIG or STACK_CONFIG for hardware or resource references
+- Tests should not have any direct references to IP addresses or hostnames. Use GLOBAL_CONFIG or STACK_CONFIG for hardware or resource references.
 
 
