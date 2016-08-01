@@ -16,8 +16,12 @@ sys.path.append(subprocess.check_output("git rev-parse --show-toplevel", shell=T
 import fit_common
 import test_api_utils
 
-# get list of managed nodes once for this test suite
+# get list of compute nodes once for this test suite
 NODELIST = fit_common.node_select()
+# remove management node
+for NODE in NODELIST:
+    if fit_common.rackhdapi('/api/2.0/nodes/' + NODE)['json']['name'] == "Management Server":
+        NODELIST.remove(NODE)
 
 def print_taskid_data(taskid, taskid_json):
     """
