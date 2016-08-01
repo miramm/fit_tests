@@ -32,7 +32,7 @@ class rackhd20_api_files(fit_common.unittest.TestCase):
     def test_api_20_files_put_get_delete(self):
         # put file fia files API, then check data
         api_data = fit_common.rackhdapi('/api/2.0/files/testfile', action="binary-put", payload = file(fit_common.TEST_PATH + 'testfile').read())
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 201, 'Incorrect HTTP return code, expected 201, got:' + str(api_data['status']))
         # Retrieve file
         fileid = ""
         api_data = fit_common.rackhdapi('/api/2.0/files')
