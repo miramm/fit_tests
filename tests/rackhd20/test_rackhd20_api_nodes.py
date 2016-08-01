@@ -70,7 +70,7 @@ class rackhd20_api_nodes(fit_common.unittest.TestCase):
         api_data = fit_common.rackhdapi(mon_url)
         self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
         api_data = fit_common.rackhdapi("/api/2.0/nodes/00:1e:67:98:bc:7e", action='delete')
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 204, 'Incorrect HTTP return code, expected 204, got:' + str(api_data['status']))
         api_data = fit_common.rackhdapi("/api/2.0/nodes/00:1e:67:98:bc:7e")
         self.assertEqual(api_data['status'], 404, 'Incorrect HTTP return code, expected 404, got:' + str(api_data['status']))
 
@@ -127,7 +127,7 @@ class rackhd20_api_nodes(fit_common.unittest.TestCase):
         self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
         # delete node
         api_data = fit_common.rackhdapi(mon_url, action="delete")
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 204, 'Incorrect HTTP return code, expected 204, got:' + str(api_data['status']))
         api_data = fit_common.rackhdapi(mon_url)
         self.assertEqual(api_data['status'], 404, 'Incorrect HTTP return code, expected 404, got:' + str(api_data['status']))
 
