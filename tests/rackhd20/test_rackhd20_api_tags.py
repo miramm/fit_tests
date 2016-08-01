@@ -45,7 +45,7 @@ class rackhd20_api_tags(fit_common.unittest.TestCase):
         self.assertIn("dummy_node", fit_common.json.dumps(api_data['json']), "Tag not set:" + fit_common.json.dumps(api_data['json']))
         # delete node
         api_data = fit_common.rackhdapi("/api/2.0/nodes/" + nodeid, action="delete")
-        self.assertEqual(api_data['status'], 200, 'Incorrect HTTP return code, expected 200, got:' + str(api_data['status']))
+        self.assertEqual(api_data['status'], 204, 'Incorrect HTTP return code, expected 204, got:' + str(api_data['status']))
 
 if __name__ == '__main__':
     fit_common.unittest.main()
