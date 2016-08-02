@@ -27,16 +27,18 @@ Tests require the following virtual environment commands be executed:
 
 ## Organization
 
-The test harness is located in the 'tests' tree.
-Common libraries are located in 'common'
-Deployment and test wrapper scripts are located in 'deploy'.
-Test script templates are located in 'templates'.
-Utilities are located in 'util'.
+- 'tests' is the test 'harness'
+- 'common' contains any common library functions
+- 'deploy' contains deployment and installation scripts
+- 'templates' contains script templates for making new tests
+- 'util' contains non-test utilities
 
 ## Configuration
 
 Local runtime parameters are set from the 'config/global_config.json' file.
 Stack definitions are set from the 'config/stack_config.json' file.
+An alternate configuration directory can be selected using the -config argument.
+More details in config/README.mg.
 
 ## Running the tests
 
@@ -98,6 +100,8 @@ For example, to run the test 'test_rackhd11_api_catalogs' in script 'tests/rackh
 
 ## Test conventions
 
+- Tests should be written using Python 'unittest' classes and methods.
+- Tests should utilize common library functions for API and appliance shell access.
 - Tests should leave the DUT(Device Under Test) in the same state that it was found. For example, if the test creates a node, then delete it.
 The setUp and tearDown methods are useful ways to setup and clean out test-specific conditions.
 - Tests should have meaningful names that relate to its function.
