@@ -34,7 +34,7 @@ def get_rackhd_nodetype(nodeid):
         # get the sku id contained in the node
         sku = mondata['json'].get("sku")
         if sku:
-            skudata = fit_common.rackhdapi("/api/common/skus/"+sku)
+            skudata = fit_common.rackhdapi("/api/1.1/skus/" + sku)
             if skudata['status'] != 200:
                 print "Incorrect HTTP return code on sku, expected 200, received: {}".format(skudata['status'])
             else:
