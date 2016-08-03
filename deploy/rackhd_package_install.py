@@ -1,10 +1,10 @@
 '''
-Copyright 2015, EMC, Inc.
+Copyright 2016, EMC, Inc.
 
 Author(s):
 George Paulos
 
-This script installs RackHD from BinTray packages onto blank OVA.
+This script installs RackHD from BinTray packages onto blank OS.
 '''
 
 import os
@@ -15,8 +15,10 @@ sys.path.append(subprocess.check_output("git rev-parse --show-toplevel", shell=T
 import fit_common
 
 # local methods
-ENVVARS = "export http_proxy=" + fit_common.GLOBAL_CONFIG['repos']['proxy'] + ";" + \
-          "export https_proxy=" + fit_common.GLOBAL_CONFIG['repos']['proxy'] + ";"
+ENVVARS = ''
+if 'proxy' in fit_common.GLOBAL_CONFIG['repos'] and fit_common.GLOBAL_CONFIG['repos']['proxy'] != '':
+    ENVVARS = "export http_proxy=" + fit_common.GLOBAL_CONFIG['repos']['proxy'] + ";" + \
+              "export https_proxy=" + fit_common.GLOBAL_CONFIG['repos']['proxy'] + ";"
 
 class rackhd_package_install(fit_common.unittest.TestCase):
     def test01_install_rackhd_dependencies(self):
